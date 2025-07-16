@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kitten Rescue</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+   
+  <header>
+    <h1>Kitten Rescue</h1>
+    <p>Find all the hidden kittens before time runs out!</p>
+    <div id="timer">Time Left: 60s</div>
+  </header>
+
+  <main>
+ <!-- Music Section-->
+        <audio id="bgMusic" src="./resourses/Music/game-music.mp3" loop></audio>
+        <button id="musicButton">🔈</button>
+    <!-- <audio id="bgMusic" src="./resourses/Music/game-music.mp3" loop></audio>
+    <button id="musicToggleBtn">🔈</button> -->
+
+      <!-- Intro Section -->
+    <section id="introBox">
+      <p id="introText">Welcome to the Kitten Rescue! 🐱☕ Would you like to save some kittens today?</p>
+      <div class="image-container">
+        <img id="introImage" class="intro-img" src="./resourses/Img/kitten.gif" alt="Hi kitten gif" />
+      </div>
+
+      <div class="image-container">
+        <img id="instructionImage" class="intro-img hidden" src="./resourses/Img/dancingkitten.gif" alt="Dancing kitten gif" />
+      </div>
+
+      <div class="image-container">
+        <img id="warningImage" class="intro-img hidden" src="./resourses/Img/warning_dog.gif" alt="Warning dog gif" />
+      </div>
+      <button id="introNextBtn">Next</button>
+    </section>
+   
+    <section id="grid" class="hidden">
+  <div class="row">
+    <div class="tile" data-index="0"></div>
+    <div class="tile" data-index="1"></div>
+    <div class="tile" data-index="2"></div>
+    <div class="tile" data-index="3"></div>
+    <div class="tile" data-index="4"></div>
+  </div>
+  <div class="row">
+    <div class="tile" data-index="5"></div>
+    <div class="tile" data-index="6"></div>
+    <div class="tile" data-index="7"></div>
+    <div class="tile" data-index="8"></div>
+    <div class="tile" data-index="9"></div>
+  </div>
+  <div class="row">
+    <div class="tile" data-index="10"></div>
+    <div class="tile" data-index="11"></div>
+    <div class="tile" data-index="12"></div>
+    <div class="tile" data-index="13"></div>
+    <div class="tile" data-index="14"></div>
+  </div>
+  <div class="row">
+    <div class="tile" data-index="15"></div>
+    <div class="tile" data-index="16"></div>
+    <div class="tile" data-index="17"></div>
+    <div class="tile" data-index="18"></div>
+    <div class="tile" data-index="19"></div>
+  </div>
+  <div class="row">
+    <div class="tile" data-index="20"></div>
+    <div class="tile" data-index="21"></div>
+    <div class="tile" data-index="22"></div>
+    <div class="tile" data-index="23"></div>
+    <div class="tile" data-index="24"></div>
+  </div>
+</section>
+
+    <div id="message"></div>
+  </main>
+
+  <footer>
+    <button id="restart">Restart Game</button>
+  </footer>
+
+  <script src="./js/app.js" defer></script>
+</body>
