@@ -138,10 +138,10 @@ function checkWinCondition() {
         } else if (tileObj.type === "dog") {
           tile.textContent = "🐶";
           playLoseSound();
-          endGame(false);
+          scareAllKittens();
         } else {
           tile.textContent = " ";
-        }
+        };
       });
 
       grid.appendChild(tile);
@@ -168,6 +168,19 @@ function checkWinCondition() {
     timerDisplay.testContent = `Time Left: ${timeLeft}s`;
   };
 
+  function scareAllKittens () {
+    foundKittens = 0;
+
+    board.forEach((tileObj, index) => {
+      if (tileObj.type === "kitten" && tileObj.revealed) {
+        tileObj.revealed = false; // Reset the revealed state
+
+        const tile = document.querySelector(`.tile[data-index="${index}"]`);
+        tile.textContent = ""; // Clear the tile content
+      }
+    });
+  };
+
 
 
 
@@ -175,6 +188,7 @@ function checkWinCondition() {
 
 
 /*--------------------------- Event Listeners -------------------------------*/
+  
   tiles.forEach((tile, index) => {
     tile.addEventListener("click", () => {
         const tileType = board[index];
