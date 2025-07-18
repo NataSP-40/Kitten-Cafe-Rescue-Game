@@ -16,9 +16,8 @@ let timerInterval = null;
 let introStep = 0;
 let isMusicPlaying = false; // default to off
 let foundKittens = 0; // to track found kittens
-let gameOver = false;
+let gameOver = false; // to track game state
 let board = []; 
-let restartBtn = null; 
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const musicButton = document.querySelector("#musicButton");
   const bgMusic = document.querySelector("#bgMusic"); 
 
-  const restartBtn = document.querySelector("#restart");
+   restartBtn = document.querySelector("#restart");
   
 /*----------------------------- Functions -----------------------------------*/
 
@@ -99,8 +98,9 @@ function checkWinCondition() {
 //================= end game
   function endGame(won) {
     clearInterval(timerInterval);
+    gameOver = true;
     if (!won) {
-      console.log("Dog barking");
+      // console.log("Dog barking");
     }
 
     // Stop music on game end
@@ -127,7 +127,10 @@ function checkWinCondition() {
       tile.setAttribute("data-index", index);
 
       tile.addEventListener("click", () => {
-        if (gameOver || tileObj.revealed) return;
+        console.log("Tile clicked");
+        if (gameOver || tileObj.revealed) {
+          return;
+        }
 
         tileObj.revealed = true;
 
@@ -168,7 +171,7 @@ function checkWinCondition() {
       bgMusic.play();
     }
 
-    timerDisplay.testContent = `Time Left: ${timeLeft}s`;
+    timerDisplay.textContent = `Time Left: ${timeLeft}s`;
   };
 
   function scareAllKittens () {
@@ -209,14 +212,15 @@ function checkWinCondition() {
     if (introStep === 1) {
       console.log("Intro step 1");
       introText.textContent =
-        "Here is what you need to do: Find all 5 kittens before time runs out and the dog comes! But, be careful!";
+        "Find 5 kittens before time runs out! But, be careful!";
       instructionImage.classList.remove("hidden");
       introBtn.textContent = "Next";
     } else if (introStep === 2) {
       console.log("Intro step 2");
       introText.textContent =
-        "There is a hidden dog! 🐾 If you click the dog, all kittens will hide again!";
+        "There is a hidden dog! If you click the dog, all kittens will hide again!";
       warningImage.classList.remove("hidden");
+      playLoseSound();
       introBtn.textContent = "Start Game";
     } else if (introStep === 3) {
       console.log("Intro step 3");
@@ -244,13 +248,13 @@ function checkWinCondition() {
   }); 
 
   restartBtn.addEventListener("click", () => {
+    console.log("Restart button clicked");
     // if (gameOver) { 
       // restartBtn not working if game is not over
     // check renderBoard or introStep 
       resetGame();
       
-    };
+    });
   });
 
-});
   
