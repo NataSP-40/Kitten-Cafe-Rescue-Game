@@ -5,12 +5,18 @@ body {
       padding: 0;
       text-align: center;
       color: #4d3b2f;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      flex-direction: column;
+      height: 100vh;
     }
 
 header {
       background-color: #fce8d5;
       padding: 1rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      width: 100%;
     }
 
 h1 {
@@ -21,9 +27,13 @@ h1 {
 
 main {
     display: flex;
+    flex-grow: 1;
     position: center;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .screen {
@@ -31,22 +41,30 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 600px;
-    width: 70%;
+    height: auto;
+    padding: 1rem;
+    width: 90%;
+    max-width: 800px;
+    min-height: 400px;
     border: solid 5px #f7bfb1;
     border-radius: 12px;
-    background-image: url(../resourses/Img/bgmarble.jpeg);
+    background-image: url(../resources/Img/bgmarble.jpeg);
     background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+
     /* animation: bg-scrolling 5s infinite linear; */
 }
 
 #introBox {
       background-color: #ffe8d6;
-      margin: 2rem auto;
+      margin: 1rem auto;
       padding: 1.5rem;
       border-radius: 12px;
-      max-width: 300px;
+      max-width: 350px;
+      width: 90%;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-sizing: border-box;
     }
 
 #introBox p {
@@ -57,7 +75,7 @@ main {
 #introNextBtn {
       background-color: #f7bfb1;
       border: none;
-      padding: 0.5rem 1.2rem;
+      padding: 0.7rem 1.5rem;
       font-size: 1rem;
       border-radius: 8px;
       cursor: pointer;
@@ -74,26 +92,29 @@ main {
     justify-content: center;
     align-items: center;
     margin-top: 0.5rem;
+    width: 100%;
   }
 
 .intro-img {
-    width: 50%;
+    width: 70%;
     max-width: 300px;
     border-radius: 10px;
     margin-top: 1rem;
+    height: auto;
   }
 
 .instructionImage {
-    width: 30%;         
-    max-width: 300px;   
+    width: 50%;         
+    max-width: 250px;   
     border-radius: 10px;
     margin-top: 1rem;
     display: none;
+    height: auto;
   }
 
 .warningImage {
-    width: 30%;         /* Makes the image smaller */
-    max-width: 300px; /* Limits the max width */
+    width: 50%;         /* Makes the image smaller */
+    max-width: 250px; /* Limits the max width */
     height: auto;  
     border-radius: 10px;
     margin-top: 1rem;
@@ -103,31 +124,43 @@ main {
 #timer {
       font-weight: bold;
       margin-top: 0.5rem;
+      font-size: 1.5rem;
     }
+    
+#levelDisplay {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 5px 0;
+}
 
 #grid {
   display: grid;
-  /* align-items: center; */
   justify-content: center;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  padding: 20px;
-  max-width: 300px;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 8px;
+  padding: 15px;
+  max-width: 400px;
+  width: 90%;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .tile {
-  width: 70px;
-  height: 70px;
+  /* min-width: 50px;
+  min-height: 50px; */
+  padding: 5px;
   background-color: #ffe; /* light tile color */
   border: 2px solid #aaa;
-  font-size: 1.8rem;
+  font-size: 1,8rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 8px;
+  aspect-ratio: 1/1;
   cursor: pointer;
   user-select: none;
   transition: background-color 0.2s ease;
+  box-sizing: border-box;
 }
 
 .tile:hover {
@@ -145,8 +178,19 @@ main {
     display: none !important;
   }
 
+  #level-up-message {
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 2px solid #444;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
 #message {
       font-size: 1.2rem;
+      font-weight: bold;
       margin-top: 1rem;
       color: #804e38;
       transition: all 0.3s ease-in-out;
@@ -156,17 +200,19 @@ main {
 footer {
       margin-top: 2rem;
       padding: 1rem;
+      width: 100%;
     }
 
 button {
      background-color: #f7bfb1;
      border: none;
-     padding: 0.5rem 1rem;
-     font-size: 1rem;
+     padding: 0.7rem 1,5rem;
+     font-size: 1.1rem;
      border-radius: 8px;
      cursor: pointer;
      color: #4d3b2f;
      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+     margin: 0.5rem;
     }
 
 button:hover {
@@ -177,23 +223,124 @@ button:hover {
     font-size: 3rem;
     background: transparent;
     border: none;
-    cursor: pointed;
+    cursor: pointer;
     color: #b5735c;
     transition: transform 0.2s ease;
-
-    /* color: #eee;
-    position: absolute;
-    top: 6px;
-    left: 9px;
-    width: 65px;
-    padding: 15px;
-    border-radius: 45px;
-    background: rgba(115, 67, 167, 0.8);
-    box-shadow: 2px 2px 4px rgb(0 0 0 / 40%);
-    opacity: 0.8;
-    cursor: pointer;
-    z-index: 12; */
 }
+
+
+@media (max-width: 768px) {
+
+   h1 {
+    font-size: 1.5rem;
+  } 
+
+  .screen {
+    width: 95%;
+    min-height: 350px;
+    padding: 0.8rem;
+  }
+  
+  #introBox {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  #introBox p {
+    font-size: 1rem;
+  }
+
+  #introNextBtn, button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  #grid {
+    padding: 10px;
+    gap: 6px;
+    max-width: calc(5 * 60px + 4 * 6px + 2 * 10px);
+    /* grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); */
+  }
+
+  .tile {
+    font-size: 1.5rem;
+  }
+
+  .intro-img, .instructionImage, .warningImage {
+    width: 60%;
+    max-width: 200px;
+  }
+
+  #timer {
+    font-size: 1.2rem;
+  }
+
+  #message {
+    font-size: 1rem;
+  }
+}
+
+  @media (max-width: 480px) {
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    }
+    .screen {
+      width: 100%;
+      min-height: 300px;
+      padding: 0.5rem;  
+    }
+
+    #introBox {
+      padding: 0.8rem;
+    }
+
+    #introBox p {
+      font-size: 0.9rem;
+    }
+
+    #introNextBtn, button {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    #grid {
+      gap: 4px;
+      padding: 8px;
+      max-width: calc(5 * 50px + 4 * 4px + 2 * 8px);
+      /* grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); */
+    }
+
+    .tile {
+      font-size: 1.3rem;
+    }
+
+    .intro-img, .instructionImage, .warningImage {
+      width: 70%;
+      max-width: 180px;
+    }
+
+    #timer {
+      font-size: 1rem;
+    }
+
+    #message {
+      font-size: 0.9rem;
+    }
+
+
+  @keyframes softPop {
+    0% {
+      opacity: 0;
+      transform: translateY(10px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
 
 
 

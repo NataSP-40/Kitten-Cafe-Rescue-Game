@@ -12,28 +12,31 @@
   <header>
     <h1>Kitten Rescue</h1>
     <p>Find all the hidden kittens before time runs out!</p>
-    <div id="timer">Time Left: 20s</div>
+    <div id="timer"> ⏰ Time Left: 30s</div>
+    <div id="levelDisplay">Level: 1</div>
+    <div id="message" class="hidden"></div>
   </header>
-
   <main>
+
+
     <div class="screen">
  
-        <audio id="bgMusic" src="./resourses/Music/game-music.mp3" loop></audio>
+        <audio id="bgMusic" src="./resources/Music/game-music.mp3" loop></audio>
         <button id="musicButton">🔈</button>
    
       <!-- Intro Section -->
     <section id="introBox">
       <p id="introText">Welcome to the Kitten Rescue!</p>
       <div class="image-container">
-        <img id="introImage" class="intro-img" src="./resourses/Img/kitten.gif" alt="Hi kitten gif" />
+        <img id="introImage" class="intro-img" src="./resources/Img/kitten.gif" alt="Hi kitten gif" />
       </div>
 
       <div class="image-container">
-        <img id="instructionImage" class="intro-img hidden" src="./resourses/Img/dancingkitten.gif" alt="Dancing kitten gif" />
+        <img id="instructionImage" class="intro-img hidden" src="./resources/Img/dancingkitten.gif" alt="Dancing kitten gif" />
       </div>
 
       <div class="image-container">
-        <img id="warningImage" class="intro-img hidden" src="./resourses/Img/warning_dog.gif" alt="Warning dog gif" />
+        <img id="warningImage" class="intro-img hidden" src="./resources/Img/warning_dog.gif" alt="Warning dog gif" />
       </div>
       <button id="introNextBtn">Next</button>
     </section>
@@ -78,11 +81,15 @@
     <div id="message"></div>
    </div>
   </main>
-
+      <div>
+      <div id="level-up-message" class="hidden">
+      <p id="level-up-text">Level 1 Complete!</p>
+      <button id="next-level-btn">Start Level 2</button>
+    </div>
   <footer>
+
     <button id="restart">Restart Game</button>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  </footer>
 
   <script src="./js/app.js" defer></script>
 </body>

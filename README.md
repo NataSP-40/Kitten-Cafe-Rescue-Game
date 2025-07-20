@@ -17,8 +17,6 @@ The game features an engaging introduction sequence that guides the player throu
 - As a player, I want to be able to restart the game easily at any point, and quickly jump into a new round if I want to improve my score or just play again.
 - As a player, I want to be able to control the audio switching it to on/off anytime.
 
-
-
 **4. Background & Motivation**  
 This project was developed as a hands-on exercise in software engineering, providing a practical application of fundamental web development concepts. As a first major project, the goal was to build a complete, interactive game from scratch, focusing on core JavaScript logic, DOM manipulation, event handling, and state management. The "Kitten Rescue!" theme was chosen for its simplicity, visual appeal, and the opportunity to implement engaging mechanics like a timer, hidden elements, and dynamic game resets. It serves as a foundational learning experience in bringing a creative idea to life through code.
 
@@ -80,9 +78,9 @@ Time's Up Sound: ../resourses/Music/timesup.mp3
 
 **Image Assets (GIFs):**  
 
-./resourses/Img/kitten.gif (for intro) 
-./resourses/Img/dancingkitten.gif (for instructions)  
-./resourses/Img/warning_dog.gif (for dog warning)  
+./resourses/Img/kitten.gif (for intro)   
+./resourses/Img/dancingkitten.gif (for instructions)    
+./resourses/Img/warning_dog.gif (for dog warning)   
 Emojis: 🐱 (kitten), 🐶 (dog) for tile content.
 
 **9. Future Enhancements**   

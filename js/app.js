@@ -4,13 +4,14 @@ console.log("Let's save some kittens today!");
 
 // Total kittens to find and total time allowed
 const totalKittens = 5;
-const startingTime = 20;
+const startingTime = 30;
 const gridSize = 5;
 
 
 
 /*---------------------------- Variables (State) ----------------------------*/
 
+let level = 1;
 let timeLeft = startingTime;
 let timerInterval = null;
 let introStep = 0;
@@ -34,9 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector("#grid");
 
   const musicButton = document.querySelector("#musicButton");
-  const bgMusic = document.querySelector("#bgMusic"); 
+  const bgMusic = document.querySelector("#bgMusic");
 
-   restartBtn = document.querySelector("#restart");
+  const levelDisplay = document.querySelector("#levelDisplay");
+  const levelUpMessage = document.querySelector("#level-up-message");
+  const levelUpText = document.querySelector("#level-up-text");
+  const nextLevelBtn = document.querySelector("#next-level-btn");
+  const restartBtn = document.querySelector("#restart");
+
+   //restartBtn = document.querySelector("#restart");
+
   
 /*----------------------------- Functions -----------------------------------*/
 
@@ -68,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+      timerDisplay.textContent = `⏰Time Left: ${timeLeft}s`;
 
       if (timeLeft === 0) {
         playLoseSound();
@@ -82,40 +90,61 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   };
 
-//================win condition
 function checkWinCondition() {
   if (foundKittens === totalKittens) {
-    console.log(`Found Kittens: ${foundKittens} out of ${totalKittens
-    }`);
     clearInterval(timerInterval);
     gameOver = true;
     launchConfetti();
     playWinSound();
+
+    level++;
+
+    if (level <= 3) {
+      const messageBox = document.querySelector("#message");
+      messageBox.tectContent = `Level ${level - 1} complete! Continue to next level ${level}!`;
+      messageBox.classList.remove("hidden");
+
+      setTimeout(() => {
+        messageBox.classList.add("hidden");
+        resetGame();
+      }, 2000); // pause for 2 s
+    } else {
+      documentQuerySelector("#mesage").textContent = "Congratulations! You rescued all the kittens!";
+      gameOver = true;
+    }
     bgMusic.pause();
     musicButton.innerText = "🔇";
   }; 
 };
-//================= end game
+
   function endGame(won) {
     clearInterval(timerInterval);
     gameOver = true;
     if (!won) {
-      // console.log("Dog barking");
-    }
+      levelUpText.textContent = `Level ${level} Complete!`;
+      nextLevelBtn.textContent = `Start Level ${level + 1}`;
+      levelUpMessage.classList.remove("hidden");
+    } else {
+      levelUpText.textContent = "Time's up! Game Over!";
+      nextLevelBtn.classList.add("hidden");
+      levelUpMessage.classList.remove("hidden");
+    };
 
     // Stop music on game end
     bgMusic.pause();
     musicButton.innerText = "🔈";
     isMusicPlaying = false;
   };
-//=======play sound when lose
+
   function playLoseSound() {
-    const sound = new Audio("../resourses/Music/timesup.mp3");
+    const sound = new Audio("./resources/Music/timesup.mp3");
+    sound.volume = 0.1;
     sound.play();
   };
 
   function playWinSound() {
-    const sound = new Audio("../resourses/Music/winsong.mp3");
+    const sound = new Audio("./resources/Music/winsong.mp3");
+    sound.volume = 0.1;
     sound.play();
   };
 
@@ -153,9 +182,14 @@ function checkWinCondition() {
 
   function resetGame() {
     foundKittens = 0;
-    timeLeft = startingTime;
+    // timeLeft = startingTime;
     gameOver = false;
-// clear any existing timer before starting a new one
+// get time based on level
+    timeLeft = getStartingTime();
+    timerDisplay.textContent = `⏰ Time Left: ${timeLeft}s`;
+
+    levelDisplay.textContent = `Level: ${level}`;
+
     if (timerInterval !== null) {
       clearInterval(timerInterval);
       timerInterval = null;
@@ -164,14 +198,13 @@ function checkWinCondition() {
     board = initializeBoard(gridSize, totalKittens);
     renderBoard();
 
-    startTimer(); // now start the timer again
-
     if (isMusicPlaying) {
+      bgMusic.pause();
       bgMusic.currentTime = 0;
       bgMusic.play();
     }
 
-    timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+    startTimer();
   };
 
   function scareAllKittens () {
@@ -195,14 +228,19 @@ function checkWinCondition() {
     });
 }
 
+function getStartingTime() {
+  if (level === 1) return 30;
+  if (level === 2) return 25;
+  if (level === 3) return 20;
+  // if (level === 4) return 15; ==== check if possible
+}
+
 
 /*--------------------------- Event Listeners -------------------------------*/
   
 
   introBtn.addEventListener("click", () => {
-    console.log("Intro button clicked");
     introStep++;
-    console.log("New introStep:", introStep);
 
     // Hide all images first
     introImage.classList.add("hidden");
@@ -210,20 +248,17 @@ function checkWinCondition() {
     warningImage.classList.add("hidden");
 
     if (introStep === 1) {
-      console.log("Intro step 1");
       introText.textContent =
         "Find 5 kittens before time runs out! But, be careful!";
       instructionImage.classList.remove("hidden");
       introBtn.textContent = "Next";
     } else if (introStep === 2) {
-      console.log("Intro step 2");
       introText.textContent =
         "There is a hidden dog! If you click the dog, all kittens will hide again!";
       warningImage.classList.remove("hidden");
       playLoseSound();
       introBtn.textContent = "Start Game";
     } else if (introStep === 3) {
-      console.log("Intro step 3");
       introBox.style.display = "none";
       grid.classList.remove("hidden");
 
@@ -235,6 +270,9 @@ function checkWinCondition() {
   });
 
   musicButton.addEventListener("click", () => {
+    if (!bgMusic) {
+      return;
+    }
     if (bgMusic.paused) {
       bgMusic.volume = 0.1;
       bgMusic.play();
@@ -248,13 +286,23 @@ function checkWinCondition() {
   }); 
 
   restartBtn.addEventListener("click", () => {
-    console.log("Restart button clicked");
-    // if (gameOver) { 
-      // restartBtn not working if game is not over
-    // check renderBoard or introStep 
       resetGame();
-      
     });
+
+  nextLevelBtn.addEventListener("click", () => {
+    level++;
+    levelUpMessage.classList.add("hidden");
+    resetGame();  
+  })
+
+  restartBtn.addEventListener("click", () => {
+    level = 1;
+    levelUpMessage.classList.add("hidden");
+     resetGame();
   });
+
+
+
+});
 
   
