@@ -70,7 +70,7 @@ This project was developed as a hands-on exercise in software engineering, provi
 * ./resourses/Img/warning_dog.gif (for dog warning)   
 * Emojis: 🐱 (kitten), 🐶 (dog) for tile content.
 
-## 8. Future Enhancements**   
+## 8. Future Enhancements   
 
 * More levels with different grid sizes
 * High score tracker
