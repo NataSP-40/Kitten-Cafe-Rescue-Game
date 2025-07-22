@@ -1,4 +1,6 @@
-console.log("Let's save some kittens today!");
+// Kitten Cafe Rescue Game
+// A fun game where you find kittens while avoiding a dog!
+// This file contains the main game logic and UI interactions
 
 /*-------------------------------- Constants --------------------------------*/
 
@@ -6,8 +8,6 @@ console.log("Let's save some kittens today!");
 const totalKittens = 5;
 const startingTime = 30;
 const gridSize = 5;
-
-
 
 /*---------------------------- Variables (State) ----------------------------*/
 
@@ -43,9 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextLevelBtn = document.querySelector("#next-level-btn");
   const restartBtn = document.querySelector("#restart");
 
-   //restartBtn = document.querySelector("#restart");
-
-  
 /*----------------------------- Functions -----------------------------------*/
 
   function initializeBoard(gridSize, totalKittens) {
@@ -98,62 +95,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   };
 
-function checkWinCondition() {
-  if (foundKittens === totalKittens) {
-    clearInterval(timerInterval);
-    gameOver = true;
+  function checkWinCondition() {
+    if (foundKittens === totalKittens) {
+      clearInterval(timerInterval);
+      gameOver = true;
 
-    //showLevelUpMessage();
-    endGame(true); // Call endGame with true to indicate win
-    launchConfetti();
-    playWinSound();
+      endGame(true); // Call endGame with true to indicate win
+      launchConfetti();
+      playWinSound();
 
-   // level++;
-// ==============
-    if (level <= 3) {
-      const messageBox = document.querySelector("#message");
-      // messageBox.textContent = `Level ${level - 1} complete! Continue to next level ${level}!`;
-      // messageBox.classList.remove("hidden");
+      if (level <= 3) {
+        const messageBox = document.querySelector("#message");
 
       setTimeout(() => {
         messageBox.classList.add("hidden");
         //resetGame();
       }, 2000); // pause for 2 s
-    } else {
-      messageBox = document.querySelector("#mesage").textContent = "Congratulations! You rescued all the kittens!";
-      gameOver = true;
-    }
-    //=============
+      } else {
+        messageBox = document.querySelector("#mesage").textContent = "Congratulations! You rescued all the kittens!";
+          gameOver = true;
+      }
+
     bgMusic.pause();
     musicButton.innerText = "🔇";
-  }; 
-};
-
-  // function showLevelUpMessage() {
-  //   const levelUpMessage = document.querySelector("#level-up-message");
-  //   levelUpMessage.innerHTML = `<p>🎉 You found all the kittens!</p>
-  //   <button id="nextLevelBtn">Start Level ${level + 1}</button>
-  // `;
-  //   levelUpMessage.classList.remove("hidden");
-
-  // const nextLevelBtn = document.querySelector("#nextLevelBtn");
-  //   if (nextLevelBtn) {
-  //     nextLevelBtn.addEventListener("click", () => {
-  //       levelUpMessage.classList.add("hidden");
-  //       level++;
-  //       resetGame();
-  //     });
-  //   }
-   
-  //   // const restartBtn = document.querySelector("#restartBtn");
-  //   // if (restartBtn) {
-  //   //   restartBtn.addEventListener("click", () => {
-  //   //     level = 1;
-  //   //     levelUpMessage.classList.add("hidden");
-  //   //     resetGame();
-  //   //   });
-  //   // }
-  // };
+    }; 
+  };
 
   function endGame(won) { // handles both win/lose conditions
     
@@ -175,35 +141,17 @@ function checkWinCondition() {
         levelUpMessage.classList.add("hidden");
         resetGame();
         });
-        // levelUpText.textContent = `Level ${level} Complete!`;
-        // nextLevelBtn.textContent = `Start Level ${level + 1}`;
-        // levelUpMessage.classList.remove("hidden");
-        // nextLevelBtn.classList.remove("hidden");
-        // playWinSound();
-        // launchConfetti();
-       
 
       } else { // final message for lev 3
         levelUpMessage.innerHTML = `<p>🎉 Congratulations! You rescued all the kittens!</p>`;
       }
-        // levelUpText.textContent = "Congratulations! You rescued all the kittens!";
-        // nextLevelBtn.classList.add("hidden");
-        // levelUpMessage.classList.remove("hidden");
-        // playWinSound();
-        // launchConfetti();
-       
-
       
       } else { // logic for lose game
         playLoseSound();
         levelUpMessage.innerHTML = `<p>🐶 Woof! Time's up! Game Over!</p>`;
 
-        // levelUpText.textContent = "Time's up! Game Over!";
-        // nextLevelBtn.classList.add("hidden");
-        // levelUpMessage.classList.remove("hidden");
-      
-      }
-      levelUpMessage.classList.remove("hidden");
+      };
+    levelUpMessage.classList.remove("hidden");
     // Stop music on game end
     bgMusic.pause();
     musicButton.innerText = "🔈";
@@ -224,16 +172,15 @@ function checkWinCondition() {
 
   function renderBoard() {
     grid.innerHTML = ""; // clear old grid
-    board.forEach((tileObj, index) => {
-      const tile = document.createElement("div");
+    board.forEach((tileObj, index) => { // create new tile elements
+      const tile = document.createElement("div"); 
       tile.classList.add("tile");
       tile.setAttribute("data-index", index);
 
       tile.addEventListener("click", () => {
-        console.log("Tile clicked");
         if (gameOver || tileObj.revealed) {
           return;
-        }
+        };
 
         tileObj.revealed = true;
 
@@ -267,7 +214,7 @@ function checkWinCondition() {
     if (timerInterval !== null) {
       clearInterval(timerInterval);
       timerInterval = null;
-    }
+    };
 
     board = initializeBoard(gridSize, totalKittens);
     renderBoard();
@@ -277,7 +224,7 @@ function checkWinCondition() {
       bgMusic.pause();
       bgMusic.currentTime = 0;
       bgMusic.play();
-    }
+    };
 
     startTimer();
   };
@@ -303,12 +250,12 @@ function checkWinCondition() {
     });
   };
 
-function getStartingTime() {
-  if (level === 1) return 30;
-  if (level === 2) return 25;
-  if (level === 3) return 20;
-  // if (level === 4) return 15; ==== check if possible
-  };
+  function getStartingTime() {
+    if (level === 1) return 30;
+    if (level === 2) return 25;
+    if (level === 3) return 20;
+    // if (level === 4) return 15; ==== check if possible
+    };
 
 
 /*--------------------------- Event Listeners -------------------------------*/
@@ -373,15 +320,6 @@ function getStartingTime() {
     resetGame();
 
   });
-
-  // nextLevelBtn.addEventListener("click", () => {
-  //   level++;
-  //   levelUpMessage.classList.add("hidden");
-  //   resetGame();  
-  // })
-
-
-
 
 });
 
